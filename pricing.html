@@ -47,7 +47,7 @@
     .top { position: sticky; top: 0; z-index: 50; background: rgba(42,47,54,0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
     .top-row { display: flex; align-items: center; justify-content: space-between; height: 72px; }
     .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.05rem; }
-    .brand-mark { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), #0099CC); display: grid; place-items: center; font-family: 'Roboto Mono', monospace; font-weight: 700; color: #0A0F1E; font-size: 0.95rem; }
+    .brand-mark { width: 56px; height: 56px; border-radius: 14px; object-fit: cover; border: 1px solid rgba(0,229,255,0.35); box-shadow: 0 0 16px rgba(0,229,255,0.30); }
     .top-nav { display: flex; gap: 32px; font-size: 0.95rem; color: var(--muted); }
     .top-nav a { transition: color 0.15s ease; }
     .top-nav a:hover, .top-nav a.is-active { color: #FFFFFF; }
@@ -154,19 +154,37 @@
       .tier-grid { grid-template-columns: 1fr; }
       .panel-grid { grid-template-columns: 1fr; }
     }
+  
+    /* Mobile menu toggle */
+    .nav-toggle { display: none; background: transparent; border: 0; cursor: pointer; padding: 8px; flex-direction: column; gap: 4px; align-items: center; justify-content: center; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: #FFFFFF; border-radius: 2px; transition: transform 0.22s ease, opacity 0.22s ease; }
+    .top.is-open .nav-toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .top.is-open .nav-toggle span:nth-child(2) { opacity: 0; }
+    .top.is-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    @media (max-width: 860px) {
+      .nav-toggle { display: flex; }
+      .top-row { position: relative; }
+      .top.is-open .top-nav { display: flex !important; position: absolute; top: 100%; left: 0; right: 0; background: rgba(10,15,30,0.97); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-top: 1px solid rgba(0,229,255,0.22); border-bottom: 1px solid rgba(0,229,255,0.22); flex-direction: column; gap: 0; padding: 8px 24px 16px; }
+      .top.is-open .top-nav a { padding: 14px 4px; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 1rem; }
+      .top.is-open .top-nav a:last-child { border-bottom: 0; }
+      /* Mobile pill: smaller, sit immediately to the left of the hamburger */
+      .top .btn-pill, .top .btn-ca-pill { padding: 2px 7px; font-size: 0.5rem; white-space: nowrap; min-width: 110px; justify-content: center; transform: scale(0.8); transform-origin: right center; margin-left: auto; margin-right: 14px; order: 0; }
+      .top .nav-toggle { order: 1; }
+    }
   </style>
 </head>
 <body>
 
   <header class="top">
     <div class="wrap top-row">
-      <a href="index.html" class="brand"><span class="brand-mark">CA</span> Crew Automate</a>
+      <a href="index.html" class="brand"><img class="brand-mark" src="hero-circuit.png" alt="Crew Automate" /> Crew Automate</a>
       <nav class="top-nav" aria-label="Primary">
         <a href="products.html">Products</a>
         <a href="pricing.html" class="is-active">Pricing</a>
         <a href="case-studies.html">Case studies</a>
-        <a href="index.html#faq">FAQ</a>
+        <a href="faq.html">FAQ</a>
       </nav>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
       <a href="contact.html" class="btn btn-pill">Book free audit</a>
     </div>
   </header>
@@ -326,7 +344,7 @@
         <a href="products.html">Products</a>
         <a href="pricing.html">Pricing</a>
         <a href="case-studies.html">Case studies</a>
-        <a href="index.html#faq">FAQ</a>
+        <a href="faq.html">FAQ</a>
         <a href="contact.html">Contact</a>
       </nav>
     </div>
@@ -349,5 +367,17 @@
     })();
   </script>
 
+
+  <script>
+    /* Mobile nav toggle */
+    (function() {
+      var t = document.querySelector('.top');
+      var b = document.querySelector('.nav-toggle');
+      if (!t || !b) return;
+      b.addEventListener('click', function(e) { e.stopPropagation(); var open = t.classList.toggle('is-open'); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+      document.addEventListener('click', function(e) { if (!t.contains(e.target)) { t.classList.remove('is-open'); b.setAttribute('aria-expanded', 'false'); } });
+      t.querySelectorAll('.top-nav a').forEach(function(a) { a.addEventListener('click', function() { t.classList.remove('is-open'); b.setAttribute('aria-expanded', 'false'); }); });
+    })();
+  </script>
 </body>
 </html>
