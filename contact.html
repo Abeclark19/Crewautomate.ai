@@ -10,12 +10,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:        #050816;
+      --bg:        #060F1C;
       --surface:   #0F1729;
       --surface-2: #1A2238;
-      --line:      rgba(0,229,255,0.22);
+      --line:      rgba(0,212,232,0.22);
       --line-soft: rgba(255,255,255,0.06);
-      --accent:    #00E5FF;
+      --accent:    #00D4E8;
       --accent-2:  #4FD1C5;
       --cta:       #FF7849;
       --text:      #FFFFFF;
@@ -43,7 +43,7 @@
     .top { position: sticky; top: 0; z-index: 50; background: rgba(42,47,54,0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
     .top-row { display: flex; align-items: center; justify-content: space-between; height: 72px; }
     .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.05rem; }
-    .brand-mark { width: 56px; height: 56px; border-radius: 14px; object-fit: cover; border: 1px solid rgba(0,229,255,0.35); box-shadow: 0 0 16px rgba(0,229,255,0.30); }
+    .brand-mark { width: 56px; height: 56px; border-radius: 14px; object-fit: cover; border: 1px solid rgba(0,212,232,0.35); box-shadow: 0 0 16px rgba(0,212,232,0.30); }
     .top-nav { display: flex; gap: 32px; font-size: 0.95rem; color: var(--muted); }
     .top-nav a { transition: color 0.15s ease; }
     .top-nav a:hover { color: #FFFFFF; }
@@ -137,7 +137,7 @@
     @media (max-width: 860px) {
       .nav-toggle { display: flex; }
       .top-row { position: relative; }
-      .top.is-open .top-nav { display: flex !important; position: absolute; top: 100%; left: 0; right: 0; background: rgba(10,15,30,0.97); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-top: 1px solid rgba(0,229,255,0.22); border-bottom: 1px solid rgba(0,229,255,0.22); flex-direction: column; gap: 0; padding: 8px 24px 16px; }
+      .top.is-open .top-nav { display: flex !important; position: absolute; top: 100%; left: 0; right: 0; background: rgba(10,15,30,0.97); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-top: 1px solid rgba(0,212,232,0.22); border-bottom: 1px solid rgba(0,212,232,0.22); flex-direction: column; gap: 0; padding: 8px 24px 16px; }
       .top.is-open .top-nav a { padding: 14px 4px; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 1rem; }
       .top.is-open .top-nav a:last-child { border-bottom: 0; }
       /* Mobile pill: smaller, sit immediately to the left of the hamburger */
