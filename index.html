@@ -69,16 +69,7 @@
     .anim-d4         { animation: fadeUp 0.65s 0.46s ease both; }
     .anim-float      { animation: floatY 5s ease-in-out infinite; }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(7, 0, 31, 0.88);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(110, 69, 255, 0.12);
-    }
+    /* ── NAV ── (orphaned: original top-level <nav> was replaced with <header class="top">. Kept commented for reference; bare `nav` selector removed because it was bleeding into the inner <nav class="top-nav">.) */
     .nav-inner {
       max-width: 1160px;
       margin: 0 auto;
