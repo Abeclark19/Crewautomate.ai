@@ -961,32 +961,76 @@
       .footer-grid { grid-template-columns: 1fr; }
       .footer-btm { flex-direction: column; align-items: flex-start; }
     }
+
+    /* ── Standardized site header (matches products / pricing / case-studies / contact / thank-you) ── */
+    header.top {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(10,15,30,0.85);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,229,255,0.22);
+    }
+    header.top .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    header.top .top-row { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    header.top .brand {
+      display: flex; align-items: center; gap: 12px;
+      font-family: 'Montserrat', system-ui, sans-serif;
+      font-weight: 700; font-size: 1.05rem; color: #FFFFFF;
+      text-decoration: none;
+    }
+    header.top .brand-mark {
+      width: 36px; height: 36px; border-radius: 10px;
+      object-fit: cover;
+      border: 1px solid rgba(0,229,255,0.35);
+      box-shadow: 0 0 16px rgba(0,229,255,0.30);
+    }
+    header.top .top-nav {
+      display: flex; gap: 32px;
+      font-size: 0.95rem; color: #FFFFFF;
+    }
+    header.top .top-nav a {
+      color: #FFFFFF;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    header.top .top-nav a:hover, header.top .top-nav a.is-active { color: #00E5FF; }
+    header.top .btn-ca {
+      display: inline-flex; align-items: center; gap: 8px;
+      border-radius: 999px;
+      font-family: 'Montserrat', system-ui, sans-serif;
+      font-weight: 600;
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+      cursor: pointer; border: 0;
+      text-decoration: none;
+    }
+    header.top .btn-ca-pill {
+      background: #00E5FF; color: #0A0F1E;
+      padding: 10px 18px; font-size: 0.9rem;
+    }
+    header.top .btn-ca-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(0,217,255,0.30);
+    }
+    @media (max-width: 860px) {
+      header.top .top-nav { display: none; }
+    }
   </style>
 </head>
 <body>
 
 <!-- ══ NAV ══ -->
-<nav>
-  <div class="nav-inner">
-    <a href="#" class="nav-logo" style="gap:0">
-      <span style="font-family:'Roboto Mono',monospace;font-weight:700;font-size:1.35rem;letter-spacing:-0.01em;color:white;">
-        <span style="background:#0A9EE0;color:white;padding:2px 7px;border-radius:5px;margin-right:6px;">AIS</span>AI Automation Society
-      </span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="#features">Features</a></li>
-      <li><a href="#steps">How it works</a></li>
-      <li><a href="products.html">Products</a></li>
-      <li><a href="pricing.html">Pricing</a></li>
-      <li><a href="case-studies.html">Case studies</a></li>
-      <li><a href="#faq">FAQ</a></li>
-    </ul>
-    <div class="nav-actions">
-      <a href="contact.html" class="btn-ghost" style="text-decoration:none;display:inline-block;">Contact</a>
-      <a href="contact.html" class="btn-green" style="text-decoration:none;display:inline-block;">Get started</a>
+  <header class="top">
+    <div class="wrap top-row">
+      <a href="index.html" class="brand"><img class="brand-mark" src="hero-circuit.png" alt="Crew Automate" /> Crew Automate</a>
+      <nav class="top-nav" aria-label="Primary">
+        <a href="products.html">Products</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="case-studies.html">Case studies</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="contact.html" class="btn-ca btn-ca-pill">Book free audit</a>
     </div>
-  </div>
-</nav>
+  </header>
 
 <!-- ══ HERO ══ -->
 <section id="hero">
