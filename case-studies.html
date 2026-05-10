@@ -39,7 +39,7 @@
     .btn-pill { background: var(--accent); color: #0A0F1E; padding: 10px 18px; font-size: 0.9rem; }
     .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,217,255,0.30); }
 
-    .top { position: sticky; top: 0; z-index: 50; background: rgba(42,47,54,0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .top { position: sticky; top: 0; z-index: 50; background: #0A0F1E; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
     .top-row { display: flex; align-items: center; justify-content: space-between; height: 72px; }
     .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.05rem; }
     .brand-mark { width: 56px; height: 56px; border-radius: 14px; object-fit: cover; border: 1px solid rgba(0,212,232,0.35); box-shadow: 0 0 16px rgba(0,212,232,0.30); }
@@ -163,6 +163,9 @@
       .top.is-open .top-nav a:last-child { border-bottom: 0; }
       /* Mobile pill: keep desktop sizing, scale to match the home page */
       .top .btn-pill, .top .btn-ca-pill {
+        white-space: nowrap;
+        min-width: 110px;
+        justify-content: center;
         transform: scale(0.8);
         transform-origin: right center;
         margin-left: auto;
