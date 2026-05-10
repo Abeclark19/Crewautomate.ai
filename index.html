@@ -985,23 +985,10 @@
       transition: color 0.15s ease;
     }
     header.top .top-nav a:hover, header.top .top-nav a.is-active { color: #00E5FF; }
-    header.top .btn-ca {
-      display: inline-flex; align-items: center; gap: 8px;
-      border-radius: 999px;
-      font-family: 'Montserrat', system-ui, sans-serif;
-      font-weight: 600;
-      transition: transform 0.15s ease, box-shadow 0.2s ease;
-      cursor: pointer; border: 0;
-      text-decoration: none;
-    }
-    header.top .btn-ca-pill {
-      background: #00E5FF; color: #0A0F1E;
-      padding: 10px 18px; font-size: 0.9rem;
-    }
-    header.top .btn-ca-pill:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 24px rgba(0,217,255,0.30);
-    }
+    /* Match the .btn / .btn-pill rules used by every other page */
+    header.top .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; border-radius: 999px; font-weight: 600; font-size: 0.95rem; transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease; cursor: pointer; border: 0; text-decoration: none; }
+    header.top .btn-pill { background: #00E5FF; color: #0A0F1E; padding: 10px 18px; font-size: 0.9rem; }
+    header.top .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,217,255,0.30); }
     @media (max-width: 860px) {
       header.top .top-nav { display: none; }
     }
@@ -1070,7 +1057,7 @@
         <a href="faq.html">FAQ</a>
       </nav>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
-      <a href="contact.html" class="btn-ca btn-ca-pill">Book free audit</a>
+      <a href="contact.html" class="btn btn-pill">Book free audit</a>
     </div>
   </header>
 
