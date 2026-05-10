@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pricing · Crew Automate</title>
+  <meta name="description" content="Three engagement tiers for AI automation. From single-system pilots to full-stack operations replacement." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #050816;
+      --surface:   #0F1729;
+      --surface-2: #1A2238;
+      --line:      rgba(0,229,255,0.22);
+      --line-soft: rgba(255,255,255,0.06);
+      --accent:    #00E5FF;
+      --accent-2:  #4FD1C5;
+      --cta:       #FF7849;
+      --text:      #FFFFFF;
+      --muted:     #FFFFFF;
+      --max:       1200px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; border-radius: 999px; font-weight: 600; font-size: 0.95rem; transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease; cursor: pointer; border: 0; }
+    .btn-primary { background: var(--cta); color: #0A0F1E; }
+    .btn-primary:hover { background: #FF8E5C; transform: translateY(-1px); box-shadow: 0 14px 32px rgba(255,120,73,0.30); }
+    .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+    .btn-ghost:hover { border-color: #FFFFFF; color: #FFFFFF; }
+    .btn-pill { background: var(--accent); color: #0A0F1E; padding: 10px 18px; font-size: 0.9rem; }
+    .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,217,255,0.30); }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--line); padding: 13px 22px; }
+    .btn-outline:hover { border-color: #FFFFFF; color: #FFFFFF; }
+
+    .top { position: sticky; top: 0; z-index: 50; background: rgba(10,15,30,0.85); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .top-row { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.05rem; }
+    .brand-mark {
+      width: 36px; height: 36px; border-radius: 10px;
+      object-fit: cover;
+      border: 1px solid rgba(0,229,255,0.35);
+      box-shadow: 0 0 16px rgba(0,229,255,0.30);
+    }
+    .top-nav { display: flex; gap: 32px; font-size: 0.95rem; color: var(--muted); }
+    .top-nav a { transition: color 0.15s ease; }
+    .top-nav a:hover, .top-nav a.is-active { color: #FFFFFF; }
+
+    /* Page hero */
+    .pg-hero { padding: 96px 0 32px; text-align: center; position: relative; overflow: hidden; }
+    .pg-hero::before { content: ''; position: absolute; inset: -10% -20% auto -20%; height: 70%; background: radial-gradient(ellipse at 50% 0%, rgba(0,217,255,0.16), transparent 60%); pointer-events: none; z-index: 0; }
+    .pg-hero > * { position: relative; z-index: 1; }
+    .pg-tag { font-family: 'Roboto Mono', monospace; font-size: 0.78rem; color: #FFFFFF; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 14px; }
+    .pg-hero h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 16px; max-width: 820px; margin-left: auto; margin-right: auto; }
+    .pg-hero h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: #FFFFFF; }
+    .pg-hero p { color: var(--muted); font-size: 1.1rem; max-width: 640px; margin: 0 auto 24px; }
+    .pg-meta { color: var(--muted); font-size: 0.9rem; }
+    .pg-meta strong { color: var(--text); }
+
+    /* Tier grid */
+    .tiers { padding: 72px 0 32px; }
+    .tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
+    .tier {
+      background: var(--surface);
+      border: 1px solid var(--line-soft);
+      border-radius: 24px;
+      padding: 36px 32px;
+      display: flex; flex-direction: column; gap: 20px;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.25s ease;
+    }
+    .tier:hover { transform: translateY(-4px); border-color: rgba(0,217,255,0.32); box-shadow: 0 30px 60px rgba(0,0,0,0.40); }
+    .tier-flag {
+      position: absolute; top: -12px; right: 24px;
+      padding: 4px 12px; border-radius: 999px;
+      font-family: 'Roboto Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #0A0F1E;
+    }
+    .tier.featured {
+      border-color: rgba(0,217,255,0.40);
+      background: linear-gradient(180deg, rgba(0,217,255,0.06), var(--surface) 50%);
+      box-shadow: 0 30px 80px rgba(0,217,255,0.10);
+    }
+    .tier-name { font-family: 'Roboto Mono', monospace; font-size: 0.78rem; color: #FFFFFF; letter-spacing: 0.12em; text-transform: uppercase; }
+    .tier-headline { font-size: 1.4rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; }
+    .tier-price { display: flex; align-items: baseline; gap: 10px; }
+    .tier-price .num { font-family: 'Roboto Mono', monospace; font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em; }
+    .tier-price .unit { color: var(--muted); font-size: 0.9rem; }
+    .tier-retainer { color: var(--muted); font-size: 0.92rem; padding-top: 6px; border-top: 1px dashed var(--line-soft); }
+    .tier-retainer strong { color: var(--text); font-weight: 600; }
+    .tier-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .tier-list li { font-size: 0.93rem; color: var(--text); padding-left: 26px; position: relative; }
+    .tier-list li::before { content: ''; width: 16px; height: 16px; border-radius: 50%; background: rgba(79,209,197,0.16); position: absolute; left: 0; top: 4px; }
+    .tier-list li::after { content: ''; width: 6px; height: 4px; border-left: 2px solid var(--accent-2); border-bottom: 2px solid var(--accent-2); transform: rotate(-45deg); position: absolute; left: 5px; top: 8px; }
+    .tier-list li.muted { color: var(--muted); }
+    .tier-list li.muted::before { background: rgba(255,255,255,0.04); }
+    .tier-list li.muted::after { display: none; }
+    .tier-cta { margin-top: auto; }
+
+    /* Inclusions panel */
+    .panel { padding: 60px 0 110px; }
+    .panel-card {
+      background: var(--surface);
+      border: 1px solid var(--line-soft);
+      border-radius: 24px;
+      padding: 40px;
+    }
+    .panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .panel h2 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 18px; }
+    .panel-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .panel-list li { font-size: 0.95rem; color: var(--text); padding-left: 22px; position: relative; }
+    .panel-list li::before { content: '→'; position: absolute; left: 0; color: #FFFFFF; font-weight: 600; }
+    .panel-note { color: var(--muted); font-size: 0.92rem; margin-top: 14px; }
+
+    /* FAQ */
+    .qa { padding: 100px 0; background: var(--surface); border-top: 1px solid var(--line-soft); }
+    .qa .head { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+    .qa-tag { font-family: 'Roboto Mono', monospace; font-size: 0.78rem; color: #FFFFFF; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; }
+    .qa h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
+    .qa-list { max-width: 760px; margin: 0 auto; }
+    .qa-item { border-bottom: 1px solid var(--line-soft); }
+    .qa-item summary { list-style: none; padding: 22px 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; cursor: pointer; font-weight: 600; font-size: 1.05rem; }
+    .qa-item summary::-webkit-details-marker { display: none; }
+    .qa-item summary::after { content: '+'; font-family: 'Roboto Mono', monospace; color: #FFFFFF; font-size: 1.2rem; transition: transform 0.2s ease; }
+    .qa-item[open] summary::after { transform: rotate(45deg); }
+    .qa-body { padding: 0 0 22px; color: var(--muted); font-size: 0.98rem; }
+
+    /* Final CTA */
+    .send { padding: 110px 0; text-align: center; background: radial-gradient(circle at center, rgba(0,217,255,0.12), transparent 60%); }
+    .send h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .send p { color: var(--muted); margin-bottom: 28px; max-width: 580px; margin-left: auto; margin-right: auto; }
+
+    /* Footer */
+    .foot { padding: 56px 0 36px; border-top: 1px solid var(--line-soft); }
+    .foot-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .foot-links { display: flex; gap: 24px; font-size: 0.9rem; color: var(--muted); flex-wrap: wrap; }
+    .foot-links a:hover { color: #FFFFFF; }
+    .foot-copy { font-size: 0.85rem; color: var(--muted); }
+
+    /* Reveal-on-scroll */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.is-visible { opacity: 1; transform: none; }
+
+    @media (max-width: 920px) {
+      .top-nav { display: none; }
+      .tier-grid { grid-template-columns: 1fr; }
+      .panel-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top">
+    <div class="wrap top-row">
+      <a href="index.html" class="brand"><img class="brand-mark" src="hero-circuit.png" alt="Crew Automate" /> Crew Automate</a>
+      <nav class="top-nav" aria-label="Primary">
+        <a href="products.html">Products</a>
+        <a href="pricing.html" class="is-active">Pricing</a>
+        <a href="case-studies.html">Case studies</a>
+        <a href="index.html#faq">FAQ</a>
+      </nav>
+      <a href="contact.html" class="btn btn-pill">Book free audit</a>
+    </div>
+  </header>
+
+  <section class="pg-hero">
+    <div class="wrap">
+      <div class="pg-tag">Pricing</div>
+      <h1>Three engagements. <em>Built for where you actually are.</em></h1>
+      <p>Pilot a single system, run a focused two-system stack, or hand us the full operations replacement. Setup is one-time; the retainer covers monitoring, refinement, and capability expansion as you grow.</p>
+      <p class="pg-meta"><strong>Every plan</strong> includes the audit, white-glove build, integrations, and the outcome guarantee. The retainer is monthly and cancellable with 30 days notice.</p>
+    </div>
+  </section>
+
+  <section class="tiers">
+    <div class="wrap">
+      <div class="tier-grid">
+
+        <article class="tier reveal">
+          <div class="tier-name">Starter</div>
+          <h2 class="tier-headline">Pilot one system. Prove the math.</h2>
+          <div class="tier-price">
+            <span class="num">$3,000</span>
+            <span class="unit">one-time setup</span>
+          </div>
+          <p class="tier-retainer"><strong>+ $1,500/mo</strong> retainer. Cancel any time after the first 60 days.</p>
+          <ul class="tier-list">
+            <li>One system of your choice</li>
+            <li>Custom build &amp; integration into your stack</li>
+            <li>Voice / writing approval before launch</li>
+            <li>Live within 14&ndash;21 days</li>
+            <li>Monthly performance review</li>
+            <li class="muted">Multi-system orchestration</li>
+            <li class="muted">Quarterly capability expansion</li>
+          </ul>
+          <a href="contact.html" class="btn btn-outline tier-cta">Start with one system &rarr;</a>
+        </article>
+
+        <article class="tier featured reveal">
+          <div class="tier-flag">Most popular</div>
+          <div class="tier-name">Growth</div>
+          <h2 class="tier-headline">Plug two systems into a working pipeline.</h2>
+          <div class="tier-price">
+            <span class="num">$8,000</span>
+            <span class="unit">one-time setup</span>
+          </div>
+          <p class="tier-retainer"><strong>+ $3,500/mo</strong> retainer. Includes two systems orchestrated together.</p>
+          <ul class="tier-list">
+            <li>Two systems of your choice, integrated</li>
+            <li>Shared CRM / calendar / inbox plumbing</li>
+            <li>Cross-system handoffs (call &rarr; lead, lead &rarr; outreach)</li>
+            <li>Live within 21&ndash;30 days</li>
+            <li>Bi-weekly performance review</li>
+            <li>Slack channel with our build team</li>
+            <li class="muted">Quarterly capability expansion</li>
+          </ul>
+          <a href="contact.html" class="btn btn-primary tier-cta">Build the duo &rarr;</a>
+        </article>
+
+        <article class="tier reveal">
+          <div class="tier-name">Scale</div>
+          <h2 class="tier-headline">Replace a department.</h2>
+          <div class="tier-price">
+            <span class="num">$15,000</span>
+            <span class="unit">one-time setup</span>
+          </div>
+          <p class="tier-retainer"><strong>+ $7,500/mo</strong> retainer. All four systems plus ongoing optimization.</p>
+          <ul class="tier-list">
+            <li>All four systems, fully integrated</li>
+            <li>Voice + Lead Gen + Inbox + Outbound orchestrated</li>
+            <li>Dedicated build &amp; ops engineer</li>
+            <li>Live within 30 days</li>
+            <li>Weekly performance review</li>
+            <li>Slack channel with our build team</li>
+            <li>Quarterly capability expansion roadmap</li>
+          </ul>
+          <a href="contact.html" class="btn btn-outline tier-cta">Replace the department &rarr;</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="wrap">
+      <div class="panel-card reveal">
+        <div class="panel-grid">
+          <div>
+            <h2>What's in every engagement</h2>
+            <ul class="panel-list">
+              <li>Free 30-minute AI audit before you commit</li>
+              <li>Written roadmap with projected ROI specific to your business</li>
+              <li>Approval gates on voice, tone, and behavior before anything goes live</li>
+              <li>Built-in escalation paths so the AI hands off when it should</li>
+              <li>Outcome guarantee &mdash; if the system underperforms the agreed targets, we make it right</li>
+              <li>30-day cancellation on the monthly retainer</li>
+            </ul>
+            <p class="panel-note">Anything not on the standard list is scoped separately so the math stays clear.</p>
+          </div>
+          <div>
+            <h2>How the retainer works</h2>
+            <ul class="panel-list">
+              <li>Monitoring &mdash; we watch performance dashboards every business day</li>
+              <li>Refinement &mdash; weekly prompt and routing tweaks based on real traffic</li>
+              <li>Volume &mdash; usage costs (calls, emails, lookups) are passed through at cost; you'll see the line items</li>
+              <li>Capability expansion &mdash; new automations layered in as you grow, scoped before any new spend</li>
+            </ul>
+            <p class="panel-note">If your usage outgrows your tier, we'll flag it before the bill changes &mdash; never after.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="qa">
+    <div class="wrap">
+      <div class="head">
+        <div class="qa-tag">Pricing FAQ</div>
+        <h2>Common questions before you commit.</h2>
+      </div>
+      <div class="qa-list">
+        <details class="qa-item">
+          <summary>Why a setup fee plus a retainer?</summary>
+          <div class="qa-body">The setup fee covers the custom build, integrations, voice training, and approval rounds &mdash; work that happens once. The retainer covers everything that has to happen every week after launch: monitoring, prompt tuning, volume changes, capability expansion. Bundling both into one number tends to either underprice the build or overprice the ongoing work.</div>
+        </details>
+        <details class="qa-item">
+          <summary>Can I start small and scale up?</summary>
+          <div class="qa-body">Yes &mdash; that's what Starter is for. Run one system in production, see the numbers, then add the next. We credit the full Starter setup fee toward Growth or Scale if you upgrade within the first 90 days.</div>
+        </details>
+        <details class="qa-item">
+          <summary>What if my volume is way above or below average?</summary>
+          <div class="qa-body">Usage-driven costs (call minutes, email sends, prospect lookups) are passed through at cost on top of the retainer, with a clear line-item invoice. If you're an outlier in either direction, we'll quote a custom retainer on the audit call so the math actually works.</div>
+        </details>
+        <details class="qa-item">
+          <summary>Is there a contract?</summary>
+          <div class="qa-body">A standard MSA + per-engagement SOW. Setup is paid 50% up front, 50% at launch. The monthly retainer is month-to-month after the first 60 days, cancellable with 30 days notice.</div>
+        </details>
+        <details class="qa-item">
+          <summary>What does the outcome guarantee actually cover?</summary>
+          <div class="qa-body">Each system has a measurable target we agree on before launch (e.g., percent of after-hours calls captured, percent of inbox triaged, percent of replies booked). If the system misses the target after a 60-day burn-in, we either rebuild the failing component at no charge or refund the setup fee. We've never had to refund yet.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="send">
+    <div class="wrap">
+      <h2>Talk numbers on the audit call.</h2>
+      <p>The first thing we do is verify the math actually works for your business. If it doesn't, we'll tell you on the call.</p>
+      <a href="contact.html" class="btn btn-primary">Book your free AI audit &rarr;</a>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="wrap foot-row">
+      <span class="foot-copy">&copy; 2026 Crew Automate. Built for businesses that don't sleep.</span>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="products.html">Products</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="case-studies.html">Case studies</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal-on-scroll
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window) || !els.length) {
+        els.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>
