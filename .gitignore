@@ -1,0 +1,8 @@
+temporary screenshots/
+.DS_Store
+*.png
+*.jpg
+*.jpeg
+*.PNG
+node_modules/
+.vercel/
