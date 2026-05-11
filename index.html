@@ -1576,45 +1576,47 @@
         panel.style.display = 'none';
       }
 
+      // Intercept the widget's shadow DOM via MutationObserver once call starts
+      function observeShadowDOM() {
+        var widget = document.querySelector('elevenlabs-convai');
+        if (!widget || !widget.shadowRoot) return;
+        var observer = new MutationObserver(function() {
+          var root = widget.shadowRoot;
+          // Try to find transcript text nodes inside the shadow DOM
+          var allText = root.querySelectorAll('[class*="transcript"],[class*="message"],[class*="caption"],[class*="text"]');
+          allText.forEach(function(el) { console.log('[shadow]', el.className, el.textContent); });
+        });
+        observer.observe(widget.shadowRoot, { childList: true, subtree: true, characterData: true });
+      }
+
+      // Use the elevenlabs-convai:call event to get the conversation object
       function attachWidget() {
         var widget = document.querySelector('elevenlabs-convai');
         if (!widget) return;
 
-        // Debug: log all events from the widget
-        var origAddEventListener = widget.addEventListener.bind(widget);
-        ['elevenlabs-convai:message','elevenlabs-convai:call','elevenlabs-convai:call-ended',
-         'message','connect','disconnect','transcript','user_transcript','agent_response',
-         'conversationMessage','convai-message','convai:message'].forEach(function(evt) {
-          origAddEventListener(evt, function(e) {
-            console.log('[EL event]', evt, e.detail || e.data || e);
-          });
-        });
-
-        // Window-level events
-        window.addEventListener('message', function(e) {
-          if (e.data && (e.data.type || e.data.source)) {
-            console.log('[EL window message]', e.data);
-            var d = e.data;
-            if (d.type === 'user_transcript' || d.source === 'user') addMessage('user', d.user_transcript || d.message || d.text);
-            if (d.type === 'agent_response' || d.source === 'ai') addMessage('agent', d.agent_response || d.message || d.text);
+        widget.addEventListener('elevenlabs-convai:call', function(e) {
+          clearTranscript();
+          // Try to grab conversation from the event or widget internals
+          var conv = e.detail?.conversation || e.detail?.session || widget.conversation || widget._conversation;
+          if (conv) {
+            conv.onMessage = function(msg) {
+              console.log('[conv.onMessage]', msg);
+              if (msg.source === 'user' || msg.role === 'user') addMessage('user', msg.message || msg.text);
+              if (msg.source === 'ai' || msg.role === 'assistant') addMessage('agent', msg.message || msg.text);
+            };
           }
+          setTimeout(observeShadowDOM, 500);
         });
 
-        widget.addEventListener('elevenlabs-convai:message', function(e) {
-          var d = e.detail || {};
-          if (d.source === 'user') addMessage('user', d.message);
-          if (d.source === 'ai') addMessage('agent', d.message);
-        });
-
-        widget.addEventListener('message', function(e) {
-          var d = e.detail || e.data || {};
-          if (d.type === 'user_transcript') addMessage('user', d.user_transcription_event?.user_transcript || d.text);
-          if (d.type === 'agent_response') addMessage('agent', d.agent_response_event?.agent_response || d.text);
-        });
-
-        widget.addEventListener('elevenlabs-convai:call', function() { clearTranscript(); });
         widget.addEventListener('elevenlabs-convai:call-ended', function() {
           setTimeout(clearTranscript, 5000);
+        });
+
+        // Also listen for any custom events the widget might fire
+        widget.addEventListener('elevenlabs-convai:message', function(e) {
+          var d = e.detail || {};
+          if (d.source === 'user') addMessage('user', d.message || d.text);
+          if (d.source === 'ai') addMessage('agent', d.message || d.text);
         });
       }
 
