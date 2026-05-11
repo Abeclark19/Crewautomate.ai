@@ -1580,6 +1580,26 @@
         var widget = document.querySelector('elevenlabs-convai');
         if (!widget) return;
 
+        // Debug: log all events from the widget
+        var origAddEventListener = widget.addEventListener.bind(widget);
+        ['elevenlabs-convai:message','elevenlabs-convai:call','elevenlabs-convai:call-ended',
+         'message','connect','disconnect','transcript','user_transcript','agent_response',
+         'conversationMessage','convai-message','convai:message'].forEach(function(evt) {
+          origAddEventListener(evt, function(e) {
+            console.log('[EL event]', evt, e.detail || e.data || e);
+          });
+        });
+
+        // Window-level events
+        window.addEventListener('message', function(e) {
+          if (e.data && (e.data.type || e.data.source)) {
+            console.log('[EL window message]', e.data);
+            var d = e.data;
+            if (d.type === 'user_transcript' || d.source === 'user') addMessage('user', d.user_transcript || d.message || d.text);
+            if (d.type === 'agent_response' || d.source === 'ai') addMessage('agent', d.agent_response || d.message || d.text);
+          }
+        });
+
         widget.addEventListener('elevenlabs-convai:message', function(e) {
           var d = e.detail || {};
           if (d.source === 'user') addMessage('user', d.message);
